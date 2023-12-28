@@ -16,6 +16,7 @@ class DataIngestion:
         try:
             data = pd.read_csv(os.path.join("notebooks/data","gemstone.csv"))
             logging.info("Read dataset as DF")
+            os.makedirs(os.path.dirname(self.ingestion_config.raw_data_path), exist_ok=True)
             data.to_csv(self.ingestion_config.raw_data_path, index=False)
             logging.info("Raw data saved in artifacts")
             logging.info("Perfrming Train test split")
