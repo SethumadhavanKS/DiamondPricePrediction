@@ -7,7 +7,7 @@ from sklearn.compose import ColumnTransformer
 
 from src.DiamondPricePrediction.logger import logging
 from src.DiamondPricePrediction.exception import CustomException
-from src.DiamondPricePrediction.utils.utils import save_object
+from src.DiamondPricePrediction.utils.utils import save_obj
 
 class DataTransformation:
      
@@ -18,6 +18,12 @@ class DataTransformation:
         # Creating numerical and categorical pipelines
         try:
 
+            cat_features = ["cut", "color", "clarity"]
+            num_features = ["carat", "depth", "table", "x", "y", "z"]
+
+            cut_cat = ["Fair", "Good", "Very Good", "Premium", "Ideal"]
+            color_cat = ["D","E","F","G","H","I","J"]
+            clarity_cat = ["I1","SI2", "SI1", "VS2", "VS1","VVS2", "VVS1", "IF"]
 
             num_pipeline = Pipeline(
                 steps=[
@@ -43,7 +49,7 @@ class DataTransformation:
             return preprocessor
         
         except Exception as e:
-            # logging.info("Exception occured in preprocessing get_data_transformation")
+            logging.info("Exception occured in preprocessing get_data_transformation")
             raise CustomException(e, sys)
 
      def initiateDataTransformation(self,train_data_path, test_data_path):
@@ -62,15 +68,16 @@ class DataTransformation:
 
             input_feature_train_arr = preprocessing_obj.fit_transform(input_feature_train_df)
             input_feature_test_arr = preprocessing_obj.transform(input_feature_test_df)
-            # logging.info("Train and test data preprocessed")
-            save_object(file_path = self.dataTransformation_config.preprocessor_obj_file_path, obj=preprocessing_obj)
-            # logging.info("Preprocessing pickle file saved")
+            logging.info("Train and test data preprocessed")
+            save_obj(file_path = self.dataTransformation_config.preprocessor_obj_file_path, obj=preprocessing_obj)
+            logging.info("Preprocessing pickle file saved")
             
             train_arr = np.c_[input_feature_train_arr, np.array(target_feature_train_df)]
             test_arr = np.c_[input_feature_test_arr, np.array(target_feature_test_df)]
 
+            return train_arr, test_arr
         except Exception as e:
-            # logging.info("Exception occured in preprocessing initiate_transformation")
+            logging.info("Exception occured in preprocessing initiate_transformation")
             raise CustomException(e, sys)
 
      

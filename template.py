@@ -15,11 +15,13 @@ lstOFFiles = [
     f"src/{packageName}/logger.py",
     f"src/{packageName}/exception.py",
     f"src/{packageName}/utils/__init__.py",
+    f"src/{packageName}/utils/utils.py",
     "notebooks/research.ipynb",
     "notebooks/data/.gitkeep",
     "requirements.txt",
     "setup.py",
-    "init_setup.sh"
+    "init_setup.sh",
+    "test.py"
 ]
 
 #Creating directory
