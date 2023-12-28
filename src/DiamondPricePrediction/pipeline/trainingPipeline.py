@@ -8,8 +8,7 @@ from src.DiamondPricePrediction.exception import CustomException
 
 class TrainingPipeline:
 
-
-    def initiate_training_pipeline():
+    def initiate_training_pipeline(self):
 
         logging.info("Initiating training pipeline")
         data_ingestion = DataIngestion()
@@ -19,4 +18,4 @@ class TrainingPipeline:
         train_arr, test_arr = data_transformation.initiateDataTransformation(train_data_path=train_data_path, test_data_path=test_data_path)
 
         model_trainer = ModelTrainer()
-        model_trainer.initiateModelTrainer()
+        model_trainer.initiateModelTrainer(train_arr,test_arr)

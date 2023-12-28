@@ -1,4 +1,4 @@
-import pandas as pd, os, sys
+import pandas as pd, os, sys, numpy as np
 from dataclasses import dataclass 
 from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import StandardScaler, OrdinalEncoder
@@ -69,7 +69,7 @@ class DataTransformation:
             input_feature_train_arr = preprocessing_obj.fit_transform(input_feature_train_df)
             input_feature_test_arr = preprocessing_obj.transform(input_feature_test_df)
             logging.info("Train and test data preprocessed")
-            save_obj(file_path = self.dataTransformation_config.preprocessor_obj_file_path, obj=preprocessing_obj)
+            save_obj(filepath = self.dataTransformation_config.preprocessor_obj_file_path, obj=preprocessing_obj)
             logging.info("Preprocessing pickle file saved")
             
             train_arr = np.c_[input_feature_train_arr, np.array(target_feature_train_df)]

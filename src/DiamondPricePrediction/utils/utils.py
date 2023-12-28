@@ -20,7 +20,7 @@ def evaluate_model(x_train, y_train, x_test, y_test, models):
      try:
           report = dict()
           for i in range(len(models)):
-               model = list(model.values())[i]
+               model = list(models.values())[i]
             #    Train model
                model.fit(x_train, y_train)
 
@@ -44,4 +44,3 @@ def load_object(file_path):
      except Exception as e:
             logging.info("Exception occured in utils load object")
             raise CustomException(e, sys)
-     

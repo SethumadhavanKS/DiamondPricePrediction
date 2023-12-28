@@ -14,7 +14,7 @@ class DataIngestion:
      def initiateDataIngestion(self):
         logging.info("Data ingestion started")
         try:
-            data = pd.read_csv(Path.join("notebooks/data","gemstone.csv"))
+            data = pd.read_csv(os.path.join("notebooks/data","gemstone.csv"))
             logging.info("Read dataset as DF")
             data.to_csv(self.ingestion_config.raw_data_path, index=False)
             logging.info("Raw data saved in artifacts")
