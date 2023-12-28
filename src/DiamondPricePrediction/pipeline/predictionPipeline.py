@@ -1,4 +1,4 @@
-import pandas as pd, os, sys
+import pandas as pd, os, sys, numpy as np
 
 from src.DiamondPricePrediction.logger import logging
 from src.DiamondPricePrediction.exception import CustomException
@@ -11,6 +11,8 @@ class PredictionPipeline():
             logging.info("Prediction pipeline")
             preprocessor_path = os.path.join("artifacts","preprocessor.pkl")
             model_path = os.path.join("artifacts","model.pkl")
+
+            print("features",features)
 
             preprocessor = load_object(preprocessor_path)
             model = load_object(model_path)
@@ -25,7 +27,7 @@ class PredictionPipeline():
      
 
 
-class CustmData:
+class CustomData:
 
     def __init__(self,
                 carat:float,
@@ -63,6 +65,7 @@ class CustmData:
                 }
             df= pd.DataFrame(custom_data_imput_dict)
             logging.info("Datafram created from custom data")
+            return df
         except Exception as e:
             logging.info("Exception occured at creating DF from custom data")
             raise CustomException(e, sys)
